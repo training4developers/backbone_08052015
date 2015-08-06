@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<script>
+
+		var a = { name: "Bob", address: {
+			street: "123 Main St.",
+			city: "Calgary",
+			province: "Alberta",
+			postalCode: "T1Y-5C3"
+		} };
+
+		var b = Object.create(a);
+		b.address.city = "Edmonton";
+		//delete b.name;
+
+		console.log(b.name);
+		console.dir(b);
+
+	</script>
+</body>
+
+</html>

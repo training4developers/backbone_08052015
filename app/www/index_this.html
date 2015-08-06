@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<script>
+
+		//(function() {
+
+			"use strict";
+
+			function myFunc() {
+				console.dir(this);
+			}
+
+			var o = {
+				myFuncA: myFunc
+			}
+
+			myFunc();
+			window.myFunc();
+			o.myFuncA();
+			myFunc.call(myFunc);
+			o.myFuncA.call({ id: 3 });
+
+			console.log(myFunc === window.myFunc);
+			console.log(o.myFuncA === myFunc);
+			console.log(o.myFuncA === window.myFunc);
+
+		//})();
+
+	</script>
+</body>
+
+</html>

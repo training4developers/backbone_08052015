@@ -1,0 +1,15 @@
+Welcome to Introduction to Backbone.js!
+
+Instructor: Eric Greene
+
+Schedule:
+
+Wednesday - Thursday: 8:30am to 4:30pm
+
+Breaks:
+
+Morning: 10:15am - 10:30am
+Lunch: Noon to 1pm
+Afternoon: 2:4pm - 3pm
+
+Class Introductions...

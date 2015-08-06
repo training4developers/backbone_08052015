@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<script>
+
+		function myFunc() {
+				console.log("called myFunc");
+				return {
+					f: function myFunc2() {
+						console.log("another func");
+					}
+				};
+		}
+
+		var t = myFunc();
+		console.log(t);
+		t.f();
+
+	</script>
+</body>
+
+</html>

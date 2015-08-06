@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<script>
+
+		var g = 0;
+
+		function outerFunc() {
+
+			var f = 0;// = g++;
+			f++;
+
+			function doSomething() {
+				console.log(f);
+			}
+
+			return doSomething;
+		}
+
+		var r = outerFunc();
+		var s = outerFunc();
+		var t = outerFunc();
+
+		r();
+		s();
+		t();
+
+		// IIFE - Immediately Invoked
+		// Function Expression
+
+		(function(p) {
+			var t = 0;
+		})(1);
+
+	</script>
+</body>
+
+</html>

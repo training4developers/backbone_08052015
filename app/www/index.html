@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<script src="libs/jquery.js"></script>
+	<script src="libs/underscore.js"></script>
+	<script src="libs/backbone.js"></script>
+	<script>
+
+		var Car = Backbone.Model.extend({
+
+			defaults: {
+				make: "",
+				model: "",
+				year: 1800
+			},
+			initialize: function() {
+				this.set("make", "Toyota");
+			},
+
+			getInfo: function() {
+				console.dir(this);
+				return this.get("make") + " " +
+					this.get("model") + " " + this.get("year");
+			}
+
+		});
+
+		var c = new Car({
+			id: 1,
+			make: "Chevy",
+			model: "Corvette",
+			year: "1967"
+		});
+
+		console.log(c.getInfo());
+
+		var c2 = new Car();
+
+		console.dir(c.getInfo === c2.getInfo);
+
+		//c.make = "Ford";
+
+		c.on("change:make", function() {
+			console.dir(arguments);
+		});
+
+		c.on("change", function() {
+			console.log("something changed");
+		});
+
+		c2.on("change", function() {
+			console.log("something changed");
+		});
+
+		c.set("make", "Ford");
+		c.set("model", "Focus");
+		c.set("year", "2015");
+
+		c2.set({
+			"make": "Tesla",
+			"model": "Model S",
+			"year": "2014"
+		});
+
+		console.log(c.getInfo());
+		console.log(c2.getInfo());
+
+
+	</script>
+</body>
+
+</html>

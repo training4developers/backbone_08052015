@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<div>
+
+		First Name: <input type="text" id="first-name"> <button id="update-first-name">Update First Name</button>
+
+	</div>
+
+
+	<script src="libs/jquery.js"></script>
+	<script src="libs/underscore.js"></script>
+	<script src="libs/backbone.js"></script>
+	<script>
+
+		function firstNameChange1(firstName) {
+			console.log("first name changed 1");
+			console.dir(arguments);
+		}
+
+		function firstNameChange2(firstName) {
+			console.log("first name changed 2");
+			console.dir(arguments);
+		}
+
+		var person = {
+			firstName: "Bob",
+			lastName: "Smith",
+			setFirstName: function(fn) {
+				this.firstName = fn;
+				this.trigger("firstNameChange", this.firstName);
+			}
+		};
+
+		_.extend(person, Backbone.Events);
+
+		person.on("firstNameChange", firstNameChange1);
+		person.once("firstNameChange", firstNameChange2);
+
+		var phoneBook = {};
+		_.extend(phoneBook, Backbone.Events);
+
+		phoneBook.listenTo(person, "firstNameChange", function(firstName) {
+			console.log("phone book: " + firstName);
+		});
+
+		phoneBook.stopListening(person, "firstNameChange");
+
+
+		$("#update-first-name").on("click", function() {
+			person.setFirstName($("#first-name").val());
+		});
+
+		/*
+
+		person.setFirstName("Tim");
+
+		person.off("firstNameChange", firstNameChange1);
+
+		person.setFirstName("Scott");
+
+		console.log(person.firstName);
+		*/
+
+
+
+	</script>
+</body>
+
+</html>
