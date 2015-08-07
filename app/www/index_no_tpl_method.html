@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<div id="myDiv">
+		<div>
+			<span id="fn">First Name: </span>
+		</div>
+		<div>
+			<span id="ln">Last Name: </span>
+		</div>
+	</div>
+	<script src="libs/jquery.js"></script>
+	<script src="libs/underscore.js"></script>
+	<script>
+
+		//var myDiv = document.getElementById("myDiv");
+		//myDiv.textContent = "Hi Class! Thanks for letting me in Canada!";
+
+		//var myDiv = $("#myDiv");
+		//myDiv.text("Hi Class! Thanks for letting me in Canada!");
+
+		var person = {
+			firstName: "Eric",
+			lastName: "Greene",
+			address: {
+				street: "124 Regal Oaks Way",
+				city: "Amherst",
+				state: "VA",
+				zipCode: "24521"
+			},
+			getFullName: function() {
+				return this.firstName + " " + this.lastName;
+			}
+		};
+
+		$("#fn").text($("#fn").text() + " " + person.firstName);
+		$("#ln").text($("#ln").text() + " " + person.lastName);
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+</head>
+
+<body>
+	<script src="libs/jquery.js"></script>
+	<script src="libs/underscore.js"></script>
+	<script src="libs/backbone.js"></script>
+	<script>
+
+		var Car = Backbone.Model.extend({
+
+			defaults: {
+				make: "",
+				model: "",
+				year: 1800
+			},
+
+			initialize: function() {
+			},
+
+			getInfo: function() {
+				console.dir(this);
+				return this.get("make") + " " +
+					this.get("model") + " " + this.get("year");
+			}
+
+		});
+
+		var Cars = Backbone.Collection.extend({
+
+		});
+
+		var cars = new Cars();
+
+		cars.add(new Car({
+			id: 1,
+			make: "Chevy",
+			model: "Corvette",
+			year: "1967"
+		}));
+
+		cars.add(new Car({
+			id: 2,
+			make: "Ford",
+			model: "Focus",
+			year: "1995"
+		}));
+
+		cars.add(new Car({
+			id: 3,
+			make: "Trudeau",
+			model: "Maple",
+			year: "1980"
+		}));
+
+		cars.each(function(car) {
+
+			console.log(car.getInfo());
+
+		});
+
+		console.log(cars.pluck("make"));
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+	<script id="person-tpl-something" type="x-template/underscore">
+		<div id="person-details">
+			<div>
+				First Name: {[data.firstName]}
+			</div>
+			<div>
+				Last Name: {{data.lastName}}
+			</div>
+			<ul>
+				[[ for (var x=0; x<data.dependents.length; x++) { ]]
+					<li>{{data.dependents[x]}}</li>
+				[[ } ]]
+			</ul>
+		</div>
+	</script>
+</head>
+
+<body>
+	<div id="content">Content</div>
+	<script src="libs/jquery.js"></script>
+	<script src="libs/underscore.js"></script>
+	<script>
+
+		var person = {
+			firstName: "<b>Eric</b>",
+			lastName: "Greene",
+			address: {
+				street: "124 Regal Oaks Way",
+				city: "Amherst",
+				state: "VA",
+				zipCode: "24521"
+			},
+			dependents: ["Amy","Sarah","Natalie","Callie","Lilly","Pumpkin"],
+			getFullName: function() {
+				return this.firstName + " " + this.lastName;
+			}
+		};
+
+		console.dir(_.templateSettings);
+
+		_.templateSettings.escape = /\{\{([\s\S]+?)\}\}/g;
+		_.templateSettings.interpolate =  /\{\[([\s\S]+?)\]\}/g
+		_.templateSettings.evaluate = /\[\[([\s\S]+?)\]\]/g
+
+		//_.templateSettings = {
+			//escape: /\{\{([\s\S]+?)\}\}/g
+			//evaluate: /\{\{-([\s\S]+?)\}\}/g,
+			//interpolate: /\{\{=([\s\S]+?)\}\}/g,
+		//};
+
+		//var personTpl = $("#person-tpl").html();
+
+		//var template = _.template(personTpl, { variable: "data" });
+
+		var template = function(data){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+__p+='\n		<div id="person-details">\n			<div>\n				First Name: '+
+((__t=(data.firstName))==null?'':__t)+
+'\n			</div>\n			<div>\n				Last Name: '+
+((__t=(data.lastName))==null?'':_.escape(__t))+
+'\n			</div>\n			<ul>\n				';
+ for (var x=0; x<data.dependents.length; x++) {
+__p+='\n					<li>'+
+((__t=(data.dependents[x]))==null?'':_.escape(__t))+
+'</li>\n				';
+ }
+__p+='\n			</ul>\n		</div>\n	';
+return __p;
+}
+
+		var html = template(person);
+
+		$("#content").html(html);
+
+
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+	<script id="person-tpl" type="x-template/underscore">
+		<form id="person-details">
+			<div>
+				<label for="first-name">First Name:</label>
+				<input type="text" value="<%- data.firstName %>" id="first-name">
+			</div>
+			<div>
+				<label for="last-name">Last Name:</label>
+				<input type="text" value="<%- data.lastName %>" id="last-name">
+			</div>
+			<div>
+				<button id="save-person" type="button">Save</button>
+				<button id="cancel-person" type="button">Cancel</button>
+			</div>
+			<ul>
+				<% for (var x=0; x<data.dependents.length; x++) { %>
+					<li><%- data.dependents[x] %></li>
+				<% } %>
+			</ul>
+		</form>
+	</script>
+</head>
+
+<body>
+	<div id="page"></div>
+	<script src="libs/jquery.js"></script>
+	<script src="libs/underscore.js"></script>
+	<script src="libs/backbone.js"></script>
+	<script>
+
+		var person = new Backbone.Model({
+			firstName: "Eric",
+			lastName: "Greene",
+			address: {
+				street: "124 Regal Oaks Way",
+				city: "Amherst",
+				state: "VA",
+				zipCode: "24521"
+			},
+			dependents: ["Amy","Sarah","Natalie","Callie","Lilly","Pumpkin"]
+		});
+
+		var PersonDetails = Backbone.View.extend({
+
+			tagName: "article",
+			className: "main",
+			id: "main-content",
+
+			events: {
+				"click #save-person": "savePerson",
+				"click #cancel-person": "cancelPerson"
+			},
+
+			initialize: function(options) {
+
+				this.options = options;
+
+				if (this.options.parent) {
+					this.options.$parent = $(this.options.parent);
+					this.options.parent = this.options.$parent[0]
+				} else if (this.options.$parent) {
+					this.options.$parent = $(this.options.parent);
+					this.options.parent = this.options.$parent[0]
+				}
+
+				this.template = _.template(
+					this.options.template,
+					{ variable: "data" }
+				);
+			},
+
+			render: function() {
+				this.$el.html(this.template(this.model.attributes));
+				this.options.$parent.append(this.$el);
+			},
+
+			savePerson: function() {
+				console.log("save person");
+				console.log("first name: " + $("#first-name").val());
+
+				this.model.set("firstName", $("#first-name").val());
+
+				console.log("last name: " + $("#last-name").val());
+			},
+
+			cancelPerson: function() {
+				console.log("you have been cancelled");
+			}
+
+		});
+
+		var personDetailsView = new PersonDetails({
+			parent: "#page",
+			template: $("#person-tpl").html(),
+			model: person
+		});
+
+		personDetailsView.render();
+
+		setTimeout(function() {
+			console.log("timeout expired");
+			personDetailsView.remove();
+		},3000);
+
+
+
+		//var domElement = document.createElement("div");
+		//document.getElementsByTagName("body")[0].appendChild(domElement);
+
+		/*
+		var contentDiv = document.getElementById("content");
+		var contentDiv = $("#content");
+		contentDiv.html("a");
+		console.dir(contentDiv);
+		*/
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intro to Backbone.js</title>
+	<script id="person-tpl" type="x-template/underscore">
+		<div id="person-details">
+			<div>
+				First Name: <%- data.firstName %>
+			</div>
+			<div>
+				Last Name: <%- data.lastName %>
+			</div>
+			<ul>
+				<% for (var x=0; x<data.dependents.length; x++) { %>
+					<li><%- data.dependents[x] %></li>
+				<% } %>
+			</ul>
+		</div>
+	</script>
+</head>
+
+<body>
+	<div id="content">Content</div>
+	<script src="libs/jquery.js"></script>
+	<script src="libs/underscore.js"></script>
+	<script>
+
+		var person = {
+			firstName: "Eric",
+			lastName: "Greene",
+			address: {
+				street: "124 Regal Oaks Way",
+				city: "Amherst",
+				state: "VA",
+				zipCode: "24521"
+			},
+			dependents: ["Amy","Sarah","Natalie","Callie","Lilly","Pumpkin"],
+			getFullName: function() {
+				return this.firstName + " " + this.lastName;
+			}
+		};
+
+		var personTpl = $("#person-tpl").html();
+
+		var template = _.template(personTpl, { variable: "data" });
+		var html = template(person);
+
+		$("#content").html(html);
+
+	</script>
+</body>
+
+</html>
